@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+}
+
+.items {
+  display: flex;
+  width: 75%;
+  margin: 25px auto;
+}
+
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 300px;
+  border: 1px solid #CAD0D2;
+  border-radius: 4px;
+}
+.item__block {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.item__price {
+  display: flex;
+  justify-content: center;
+  color: #57727C;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 15px 0;
+  border-top: 1px solid #D7DBDD;
+  background-color: #EEF3F5;
+}

@@ -1,0 +1,46 @@
+type Query {
+    getHero: User
+    getMerchants: [User]
+    getUser(name: String!): User
+    getUserItemsByType(name: String!, itemType: ItemType): [Inventory]
+    getUserItemSlot(name: String!, itemName: String!): [Inventory]
+    getItemByName(name: String!): Item
+}
+
+type Mutation {
+    itemTransaction(buyerName: String!, sellerName: String!, itemName: String!, quantity: Int!, shopSection: ItemType): [Inventory]
+}
+
+type Item {
+    id: ID!
+    type: ItemType!
+    name: String!
+    description: String
+    price: Int!
+    atk: Int
+    dmg: Int
+    mag: Int
+    def: Int
+    MDef: Int
+    HP: Int
+}
+
+type Inventory {
+    id: ID!
+    item: Item!
+    quantity: Int!
+}
+
+type User {
+    id: ID!
+    type: String!
+    name: String!
+    gils: Int!
+    bag: [Inventory!]!
+}
+
+enum ItemType {
+    MISC
+    WEAPON
+    ARMOR
+}

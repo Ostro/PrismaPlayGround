@@ -1,0 +1,16 @@
+{
+  "name": "prisma-rpg-shop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Ostro/PrismaPlayGround.git",
+  "author": "Ostro <lebreton.arnaud.ece@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.17.4",
+    "lodash": "^4.17.11",
+    "prisma-client-lib": "^1.29.0"
+  },
+  "scripts": {
+    "prettify": "prettier --single-quote --trailing-comma es5 --write '{app,view}/**/*.js'"
+  }
+}

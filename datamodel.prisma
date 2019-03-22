@@ -1,0 +1,39 @@
+type Item {
+    id: ID! @unique
+    type: ItemType!
+    name: String! @unique
+    description: String
+    price: Int!
+    atk: Int
+    dmg: Int
+    mag: Int
+    def: Int
+    MDef: Int
+    HP: Int
+}
+
+type User {
+    id: ID! @unique
+    type: UserType!
+    name: String! @unique
+    gils: Int!
+    bag: [Inventory!]! @relation(name: "OwnerRelation", onDelete: CASCADE)
+}
+
+type Inventory {
+    id: ID! @unique
+    owner: User! @relation(name: "OwnerRelation")
+    item: Item!
+    quantity: Int!
+}
+
+enum ItemType {
+    MISC
+    WEAPON
+    ARMOR
+}
+
+enum UserType {
+    PLAYER
+    NPC
+}
