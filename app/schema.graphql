@@ -8,7 +8,7 @@ type Query {
 }
 
 type Mutation {
-    itemTransaction(buyerName: String!, sellerName: String!, itemName: String!, quantity: Int!, shopSection: ItemType): [Inventory]
+    itemTransaction(buyerName: String!, sellerName: String!, itemName: String!, quantity: Int!): ItemTransaction
 }
 
 type Item {
@@ -43,4 +43,10 @@ enum ItemType {
     MISC
     WEAPON
     ARMOR
+}
+
+type ItemTransaction {
+    inventorySlot: [Inventory]
+    sellerMoney: Int
+    buyerMoney: Int
 }

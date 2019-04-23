@@ -33,7 +33,7 @@ const resolvers = {
   Mutation: {
     async itemTransaction(
       root,
-      { buyerName, sellerName, itemName, quantity, shopSection },
+      { buyerName, sellerName, itemName, quantity },
       context
     ) {
       const buyer = await resolvers.Query.getUser(
@@ -115,11 +115,15 @@ const resolvers = {
         data: { gils: seller.gils + item.price * nbItemToBuy },
       });
 
-      return resolvers.Query.getUserItemsByType(
-        root,
-        { name: sellerName, itemType: shopSection },
-        context
-      );
+      return {
+        inventorySlot: resolvers.Query.getUserItemSlot(
+          root,
+          { name: sellerName, itemName: itemName },
+          context
+        ),
+        sellerMoney: seller.gils + item.price * nbItemToBuy,
+        buyerMoney: buyer.gils - item.price * nbItemToBuy
+      }
     },
   },
   User: {

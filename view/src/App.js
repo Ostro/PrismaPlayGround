@@ -1,73 +1,29 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
+import {Provider} from 'react-redux'
 import ApolloClient from 'apollo-boost';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './components/home'
+import Inventory from './components/inventory'
 import './App.css';
+import store from './store'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4466',
+  uri: 'http://localhost:4000',
 });
-
-const USERS_QUERY = gql`
-  query {
-    users {
-      id
-      name
-      gils
-      bag {
-        item {
-          name
-          description
-          price
-        }
-        quantity
-      }
-    }
-  }
-`;
 
 class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div className="App">
-          <h1>Store</h1>
-          <Query query={USERS_QUERY}>
-            {({ loading, error, data }) => {
-              if (loading) return <p>Loading...</p>;
-              if (error) return <p>Error :(</p>;
-
-              return (
-                <div>
-                  {data.users.map(user => {
-                    return (
-                      <div>
-                        <div>{user.name}</div>
-                        <div className="items">
-                          {user.bag.map(inventory => {
-                            return (
-                              <div className="item">
-                                <div className="item__block">
-                                  <div>{inventory.item.name}</div>
-                                  <div>{inventory.item.description}</div>
-                                </div>
-                                <div className="item__price">
-                                  {inventory.item.price} Gils (
-                                  {inventory.quantity} left)
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            }}
-          </Query>
-        </div>
+        <Provider store={store}>
+          <Router className="App">
+            <div className="Main">
+              <Route exact path="/" component={Home} />
+              <Route path="/inventory/:name" component={Inventory} />
+            </div>
+          </Router>
+        </Provider>
       </ApolloProvider>
     );
   }
